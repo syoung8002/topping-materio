@@ -1,6 +1,6 @@
 name: Materio
 rating: 5
-imageUrl: https://github.com/msa-ez/topping-materio/assets/123912988/2aaa6cbf-6666-4c13-8b8a-537464983b20
+imageUrl: https://github.com/msa-ez/topping-materio/assets/123912988/290527c6-f252-4470-a4bf-255a048642e3
 description: Provides data display and manipulation capabilities like sorting, filtering, and editing within the Materio, a useful data grid component for web applications.
 depends:
 tags:
