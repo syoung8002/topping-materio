@@ -1,7 +1,3 @@
-forEach: Model
-fileName: vue.code-snippets
-path: for-model/frontend-materio/javascript-version/.vscode
----
 {
     "script": {
         "prefix": "vue-sfc-ts",

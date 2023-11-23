@@ -1,7 +1,3 @@
-forEach: Model
-fileName: index.js
-path: frontend-materio/javascript-version/src/router
----
 import { setupLayouts } from 'virtual:generated-layouts'
 import { createRouter, createWebHashHistory } from 'vue-router';
 import routes from '~pages'

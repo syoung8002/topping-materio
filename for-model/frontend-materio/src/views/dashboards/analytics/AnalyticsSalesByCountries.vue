@@ -1,7 +1,3 @@
-forEach: Model
-fileName: AnalyticsSalesByCountries.vue
-path: for-model/frontend-materio/javascript-version/src/views/dashboards/analytics
----
 <script setup>
 const salesByCountries = [
   {

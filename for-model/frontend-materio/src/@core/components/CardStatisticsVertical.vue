@@ -1,7 +1,3 @@
-forEach: Model
-fileName: CardStatisticsVertical.vue
-path: for-model/frontend-materio/javascript-version/src/@core/components
----
 <script setup>
 const props = defineProps({
   title: {
