@@ -1,6 +1,6 @@
-import { setupLayouts } from 'virtual:generated-layouts'
+fileName: index.js
+---
 import { createRouter, createWebHashHistory } from 'vue-router';
-import routes from '~pages'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -27,7 +27,6 @@ const router = createRouter({
   {{/boundedContexts}}
       ]
     },
-    ...setupLayouts(routes),
   ],
 })
 
