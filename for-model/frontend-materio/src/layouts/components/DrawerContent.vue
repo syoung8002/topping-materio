@@ -1,3 +1,6 @@
+forEach: Model
+fileName: DrawerContent.vue
+---
 <script setup>
 import {
   VerticalNavLink,
@@ -9,7 +12,6 @@ const vuetifyTheme = useTheme()
 </script>
 
 <template>
-  <!-- 👉 Nav header -->
   <div class="nav-header">
     <RouterLink
       to="/"
@@ -23,10 +25,8 @@ const vuetifyTheme = useTheme()
     </RouterLink>
   </div>
 
-  <!-- 👉 Nav items -->
   <ul>
-    <!-- 👉 Pages -->
-    {{#boundedContexts}}
+  {{#boundedContexts}}
     <VerticalNavSectionTitle :item="{ heading: '{{namePascalCase}}' }" />
     {{#aggregates}}
     <VerticalNavLink
@@ -36,12 +36,6 @@ const vuetifyTheme = useTheme()
       }"
     />
     {{/aggregates}}
-    {{#boundedContexts}}
+  {{/boundedContexts}}
   </ul>
 </template>
-
-<style lang="scss">
-.upgrade-banner {
-  margin-block-start: auto;
-}
-</style>
