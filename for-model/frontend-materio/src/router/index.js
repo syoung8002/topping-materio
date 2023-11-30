@@ -1,3 +1,7 @@
+forEach: Model
+fileName: index.js
+path: for-model/frontend-materio/src/router
+---
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 const router = createRouter({
