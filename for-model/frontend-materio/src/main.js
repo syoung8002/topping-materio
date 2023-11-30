@@ -11,21 +11,22 @@ import { createApp } from 'vue'
 import axios from 'axios';
 import { Icon } from '@iconify/vue';
 
-axios.defaults.baseURL = ''
-
-
 loadFonts()
 
+// Create vue app
 const app = createApp(App)
 
+// Setting Config
+axios.defaults.baseURL = '';
 app.config.globalProperties.$axios = axios;
 
-app.use(vuetify)
-
-app.use(createPinia())
-
-app.use(router)
-
+// Component
 app.component('Icon',Icon)
 
+// Use plugins
+app.use(vuetify)
+app.use(createPinia())
+app.use(router)
+
+// Mount vue app
 app.mount('#app')

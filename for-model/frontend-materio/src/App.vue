@@ -1,10 +1,10 @@
 <script setup>
+import Chat from '@/components/Chat.vue'
 </script>
 
 <template>
   <VApp>
-    <VLayout class="layout-wrapper layout-nav-type-vertical">
-      <RouterView />
-    </VLayout>
+    <RouterView />
+    <Chat />
   </VApp>
 </template>

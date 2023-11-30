@@ -8,6 +8,7 @@ import { defineConfig } from 'vite'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
 import vuetify from 'vite-plugin-vuetify'
+import ViteYaml from '@modyfi/vite-plugin-yaml'
 
 export default defineConfig({
   plugins: [
@@ -33,6 +34,7 @@ export default defineConfig({
       vueTemplate: true,
     }),
     DefineOptions(),
+    ViteYaml(),
   ],
   resolve: {
     alias: {
