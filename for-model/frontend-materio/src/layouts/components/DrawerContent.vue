@@ -1,6 +1,3 @@
-forEach: Model
-fileName: DrawerContent.vue
----
 <script setup>
 import {
   VerticalNavLink,

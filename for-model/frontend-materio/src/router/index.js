@@ -1,6 +1,3 @@
-forEach: Model
-fileName: index.js
----
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 const router = createRouter({
