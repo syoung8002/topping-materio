@@ -44,7 +44,7 @@ const vuetifyTheme = useTheme()
 
     <!-- 👉 Footer -->
     <template #footer>
-      <Footer />
+      <!-- <Footer /> -->
     </template>
   </VerticalNavLayout>
 </template>

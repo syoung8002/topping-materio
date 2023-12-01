@@ -9,26 +9,24 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: () => import('../layouts/default.vue'),
-      children: [
-  {{#boundedContexts}}
-    {{#aggregates}}
-        {
-          path: '/{{namePlural}}',
-          component: () => import('../ui/{{namePascalCase}}Grid.vue'),
-        },
-    {{/aggregates}}
-    {{#views}}
-      {{#ifEquals dataProjection "cqrs"}}
-        {
-          path: '/{{namePlural}}',
-          component: () => import('../views/{{namePascalCase}}View.vue'),
-        },
-      {{/ifEquals}}
-    {{/views}}
-  {{/boundedContexts}}
-      ]
+      component: () => import('../pages/Index.vue'),
     },
+{{#boundedContexts}}
+  {{#aggregates}}
+    {
+      path: '/{{namePlural}}',
+      component: () => import('../ui/{{namePascalCase}}Grid.vue'),
+    },
+  {{/aggregates}}
+  {{#views}}
+    {{#ifEquals dataProjection "cqrs"}}
+    {
+      path: '/{{namePlural}}',
+      component: () => import('../views/{{namePascalCase}}View.vue'),
+    },
+    {{/ifEquals}}
+  {{/views}}
+{{/boundedContexts}}
   ],
 })
 
