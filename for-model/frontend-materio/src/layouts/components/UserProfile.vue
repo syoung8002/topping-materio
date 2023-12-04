@@ -1,6 +1,4 @@
 <script setup>
-import avatar1 from '@/assets/images/avatars/avatar-1.png'
-
 const avatarBadgeProps = {
   dot: true,
   location: 'bottom right',
@@ -9,6 +7,8 @@ const avatarBadgeProps = {
   color: 'success',
   bordered: true,
 }
+
+const userName = "USER"
 </script>
 
 <template>
@@ -18,7 +18,7 @@ const avatarBadgeProps = {
       color="primary"
       variant="tonal"
     >
-      <VImg :src="avatar1" />
+      <VIcon icon="mdi-account" />
 
       <!-- SECTION Menu -->
       <VMenu
@@ -38,77 +38,19 @@ const avatarBadgeProps = {
                     size="40"
                     variant="tonal"
                   >
-                    <VImg :src="avatar1" />
+                    <VIcon icon="mdi-account" />
                   </VAvatar>
                 </VBadge>
               </VListItemAction>
             </template>
 
             <VListItemTitle class="font-weight-semibold">
-              John Doe
+              {{ userName }}
             </VListItemTitle>
-            <VListItemSubtitle class="text-disabled">
-              Admin
-            </VListItemSubtitle>
           </VListItem>
 
           <VDivider class="my-2" />
-
-          <!-- 👉 Profile -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-account-outline"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>Profile</VListItemTitle>
-          </VListItem>
-
-          <!-- 👉 Settings -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-cog-outline"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>Settings</VListItemTitle>
-          </VListItem>
-
-          <!-- 👉 Pricing -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-currency-usd"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>Pricing</VListItemTitle>
-          </VListItem>
-
-          <!-- 👉 FAQ -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-help-circle-outline"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>FAQ</VListItemTitle>
-          </VListItem>
-
-          <!-- Divider -->
-          <VDivider class="my-2" />
-
+          
           <!-- 👉 Logout -->
           <VListItem to="/login">
             <template #prepend>

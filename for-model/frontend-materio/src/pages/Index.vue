@@ -15,21 +15,15 @@ fileName: Index.vue
           <v-icon style="margin-top: 30%; margin-left: 37.5%;" color="primary" size="64">mdi-apps</v-icon>
         </v-list-item>
         <v-card-actions>
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on }">
-                <v-btn
-                    v-on="on"
-                    class="mx-auto"
-                    outlined
-                    rounded
-                    :to="card.link"
-                    style="font-weight:500; font-size:20px; border:solid 2px; max-width:250px; overflow:hidden; margin-top: 10%;"
-                >
-                    {{ card.text }}
-                </v-btn>
-            </template>
-            <span>{{ card.text }}</span>
-          </v-tooltip>
+          <v-btn
+              class="mx-auto"
+              outlined
+              rounded
+              :to="card.link"
+              style="font-weight:500; font-size:20px; border:solid 2px; max-width:250px; overflow:hidden; margin-top: 10%;"
+          >
+              \{{ card.text }}
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-row>

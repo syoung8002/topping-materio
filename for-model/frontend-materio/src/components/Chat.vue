@@ -107,8 +107,8 @@
 import ChatGenerator from "../ai/ChatGenerator.js";
 import apiSpec from "../api/openapi.js";
 
-const BaseRepository = require('../repository/BaseRepository');
-const axios = require('axios').default;                  
+import BaseRepository from "../repository/BaseRepository";
+import axios from "@axios";
 
 export default {
     name: 'Chat',

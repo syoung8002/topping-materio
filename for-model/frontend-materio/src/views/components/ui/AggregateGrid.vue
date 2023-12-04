@@ -151,7 +151,7 @@ fileName: {{namePascalCase}}Grid.vue
                 </v-dialog>
             </div>
         </v-col>
-    </div>
+    </v-container>
 </template>
 
 <script>
