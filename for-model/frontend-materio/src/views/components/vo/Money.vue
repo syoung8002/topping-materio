@@ -2,14 +2,14 @@ fileName: Money.vue
 ---
 <template>
     <div style="margin: 0 -15px 0 -15px;">
-        <v-card-title v-if="inList">
+        <v-card-title v-if="inList" style="font-size: 15px;">
             \{{money.amount}} \{{money.currency}} 
         </v-card-title>
         <v-card-text v-if="!inList">
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode">
                 <v-text-field type="number" label="Amount" v-model="money.amount"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode" style="margin-top: 5px;">
                 <v-text-field label="Currency" v-model="money.currency"/>
             </div>
             <!-- <div v-else>

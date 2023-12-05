@@ -2,28 +2,27 @@ fileName: Address.vue
 ---
 <template>
     <div style="margin: 0 -15px 0 -15px;">
-        <v-card-title  v-if="inList">
+        <v-card-title  v-if="inList" style="font-size: 15px;">
             \{{address.country }} / \{{address.state }} \{{address.city }} \{{address.street }} (\{{address.zipcode }})
         </v-card-title>
-        <v-card-text v-if="inList">
-            <div v-if="editMode" style="margin-top:-20px;">
+        <v-card-text v-if="!inList">
+            <div v-if="editMode">
                 <v-text-field label="Country" v-model="address.country" />
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode" style="margin-top: 5px;">
                 <v-text-field label="State" v-model="address.state" placeholder="OO도"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode" style="margin-top: 5px;">
                 <v-text-field label="City" v-model="address.city"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode" style="margin-top: 5px;">
                 <v-text-field label="Street" v-model="address.street"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode" style="margin-top: 5px;">
                 <v-text-field label="Zipcode" v-model="address.zipcode" />
             </div>
 
-            <div v-if="!inList">
-                <p style="font-family:sans-serif; font-weight:bold; font-size:15px">\{{address.country }} / \{{address.state }} \{{address.city }} \{{address.street }} (\{{address.zipcode }})</p>
+            <div>
                 <v-divider></v-divider><br>
                 <GoogleMap
                     api-key="AIzaSyBupK0cTa2fQJA833My7W-BGLAYvQQEN1Q"
@@ -50,7 +49,7 @@ fileName: Address.vue
 </template>
 
 <script>
-    import { GoogleMap, Marker} from 'vue3-google-maps'
+    import { GoogleMap, Marker } from "vue3-google-map";
 
     export default {
         name:"Address",

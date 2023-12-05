@@ -1,11 +1,11 @@
 fileName: User.vue
 ---
 <template>
-    <div style="margin: 0 -15px 0 -15px;">
-        <v-card-title  v-if="editMode">
-            \{{label}}
+    <div style="margin: 13px 0 -15px 0">
+        <v-card-title  v-if="inList" style="font-size: 15px;">
+            UserName: \{{user.name}}, Id: \{{ user.userId }}
         </v-card-title>
-        <v-card-title  v-if="!editMode">
+        <v-card-title  v-if="!inList">
             Your Profile
             <v-col
                 cols="12"
@@ -30,26 +30,26 @@ fileName: User.vue
             </v-col>
         </v-card-title>
 
-        <v-card-text v-if="value">
-            <div v-if="editMode" style="margin-top:-20px;">
-                <v-text-field label="Id" v-model="value.userId"/>
+        <v-card-text v-if="user">
+            <div v-if="editMode">
+                <v-text-field label="Id" v-model="user.userId"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
-                <v-text-field label="Password" v-model="value.password"/>
+            <div v-if="editMode" style="margin-top: 5px;">
+                <v-text-field label="Password" v-model="user.password"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
-                <v-text-field label="Name" v-model="value.name"/>
+            <div v-if="editMode" style="margin-top: 5px;">
+                <v-text-field label="Name" v-model="user.name"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
-                <v-text-field label="Email" v-model="value.email"/>
+            <div v-if="editMode" style="margin-top: 5px;">
+                <v-text-field label="Email" v-model="user.email"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
-                <v-text-field label="Address" v-model="value.address"/>
+            <div v-if="editMode" style="margin-top: 5px;">
+                <v-text-field label="Address" v-model="user.address"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
-                <v-text-field label="Phone" v-model="value.phone"/>
+            <div v-if="editMode" style="margin-top: 5px;">
+                <v-text-field label="Phone" v-model="user.phone"/>
             </div>
-            <div v-if="!editMode">
+            <div v-if="!editMode" style="margin-top: 5px;">
                 <v-card
                     v-if="!editMode && avatarMode"
                     class="mx-auto"
@@ -64,7 +64,7 @@ fileName: User.vue
                         <v-col class="py-0">
                             <v-avatar width="120" height="120" color="white" style="margin: 15px 0 -5px 40px;">
                                 <v-img
-                                    :src="value.profileImg ? value.profileImg:'https://user-images.githubusercontent.com/92732781/174538537-631a0ee2-40bb-4589-a58b-67da0ef17e38.png'"
+                                    :src="user.profileImg ? user.profileImg:'https://user-images.githubusercontent.com/92732781/174538537-631a0ee2-40bb-4589-a58b-67da0ef17e38.png'"
                                     class="mx-auto"
                                 ></v-img>
                             </v-avatar>
@@ -73,7 +73,7 @@ fileName: User.vue
                             >
                                 <v-list-item-content>
                                     <v-list-item-title class="text-h6" align="center">
-                                        \{{value.name }}
+                                        {{ user.name }}
                                     </v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
@@ -81,7 +81,7 @@ fileName: User.vue
                     </v-row>
                 </v-card>
                 <v-card
-                    v-if="!editMode && !avatarMode"
+                    v-if="!inList"
                     class="mx-auto"
                     max-width="400"
                     style="margin-bottom:10px;"
@@ -99,7 +99,7 @@ fileName: User.vue
                         <v-col class="py-0">
                         <v-avatar color="white" style="margin: 15px 0 -5px 15px;">
                             <v-img
-                                :src="value.profileImg ? value.profileImg:'https://user-images.githubusercontent.com/92732781/174538537-631a0ee2-40bb-4589-a58b-67da0ef17e38.png'"
+                                :src="user.profileImg ? user.profileImg:'https://user-images.githubusercontent.com/92732781/174538537-631a0ee2-40bb-4589-a58b-67da0ef17e38.png'"
                                 class="mx-auto"
                             ></v-img>
                         </v-avatar>
@@ -111,11 +111,11 @@ fileName: User.vue
                                     
                                 </v-list-item-title>
                                 <v-list-item-subtitle style="font-weight:500;">
-                                    Id :  \{{value.userId }}<br>
-                                    Password :  \{{value.password }}<br>
-                                    Email :  \{{value.email }}<br>
-                                    Address :  \{{value.address }}<br>
-                                    Phone :  \{{value.phone }}
+                                    Id :  {{user.userId }}<br>
+                                    Password :  {{user.password }}<br>
+                                    Email :  {{user.email }}<br>
+                                    Address :  {{user.address }}<br>
+                                    Phone :  {{user.phone }}
                                 </v-list-item-subtitle>
                             </v-list-item-content>
                         </v-list-item>
@@ -132,16 +132,18 @@ fileName: User.vue
         name:"User",
         props: {
             editMode: Boolean,
-            value : Object,
-            label : String, 
+            modelValue : Object,
+            label : String,
+            inList: Boolean
         },
         data: () => ({
             avatarMode : false,
+            user:{}
         }),
         created(){
-            this.value = this.modelValue
-            if(!this.value) {
-                this.value = {
+            this.user = this.modelValue
+            if(!this.user) {
+                this.user = {
                     'userId': '',
                     'password': '',
                     'name': '',
@@ -152,7 +154,7 @@ fileName: User.vue
             }
         },
         watch: {
-            value(newVal) {
+            user(newVal) {
                 this.$emit('update:modelValue', newVal);
             },
         },

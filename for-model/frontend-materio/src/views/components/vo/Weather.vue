@@ -5,7 +5,7 @@ fileName: Weather.vue
         <v-card-title  v-if="inList" v-model="weather" style="font-size: 13px;">
             <div v-if="weather.degree == 0 && weather.degree == 0 && weather.wind == 0"/>
             <div v-else>
-                온도 {{ weather.degree }}°/풍속 {{ weather.wind }}km/h/강수확률 {{ weather.precipitation }}%
+                온도 \{{ weather.degree }}°/풍속 \{{ weather.wind }}km/h/강수확률 \{{ weather.precipitation }}%
             </div>
         </v-card-title>
 

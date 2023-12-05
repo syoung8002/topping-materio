@@ -11,15 +11,25 @@ import UserProfile from '@/layouts/components/UserProfile.vue'
 <template>
   <VerticalNavLayout>
     <!-- 👉 navbar -->
-    <template #navbar>
-      <VSpacer />
+    <template #navbar="{ toggleVerticalOverlayNavActive }">
+      <div class="d-flex h-100 align-center">
+        <!-- 👉 Vertical nav toggle in overlay mode -->
+        <IconBtn
+          class="ms-n3 d-lg-none"
+          @click="toggleVerticalOverlayNavActive(true)"
+        >
+          <VIcon icon="mdi-menu" />
+        </IconBtn>
 
-      <NavbarThemeSwitcher class="me-2" />
+        <VSpacer />
 
-      <UserProfile />
+        <NavbarThemeSwitcher class="me-2" />
+
+        <UserProfile />
+      </div>
     </template>
 
-    <template #navigation-drawer-content>
+    <template #vertical-nav-content>
       <DrawerContent />
     </template>
 

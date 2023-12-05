@@ -2,15 +2,15 @@ fileName: Payment.vue
 ---
 <template>
     <div style="margin: 0 -15px 0 -15px;">
-        <v-card-title v-if="inList">
+        <v-card-title v-if="inList" style="font-size: 15px;">
             PaymentType: \{{payment.paymentType }}/Amount: \{{payment.amount }}
         </v-card-title>
         <v-card-text v-if="!inList">
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode">
                 <v-text-field label="PaymentType" v-model="payment.paymentType"/>
             </div>
             
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode" style="margin-top:5px;">
                 <v-text-field type="number" label="Amount" v-model="payment.amount"/>
             </div>
             

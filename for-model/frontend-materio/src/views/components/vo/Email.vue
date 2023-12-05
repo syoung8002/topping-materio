@@ -2,17 +2,17 @@ fileName: Email.vue
 ---
 <template>
     <div style="margin: 0 -15px 0 -15px;">
-        <v-card-title v-if="inList" >
+        <v-card-title v-if="inList" style="font-size: 15px;">
             Address: \{{email.address }} / Subject: \{{email.subject }} / Content: \{{email.content }}
         </v-card-title>
         <v-card-text v-if="!inList">
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode">
                 <v-text-field label="Address" v-model="email.address"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode" style="margin-top: 5px;">
                 <v-text-field label="Subject" v-model="email.subject"/>
             </div>
-            <div v-if="editMode" style="margin-top:-20px;">
+            <div v-if="editMode" style="margin-top: 5px;">
                 <v-text-field label="Content" v-model="email.content"/>
             </div>
             
