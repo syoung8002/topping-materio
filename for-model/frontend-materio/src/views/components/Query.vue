@@ -50,70 +50,68 @@ except: {{#ifEquals dataProjection "query-for-aggregate"}}false{{else}}true{{/if
 
 <script>
 {{#queryParameters}}
-{{#if (isPrimitive className)}}
+{{#if (isPrimitiveImport className)}}
 import {{getPrimitiveType className}} from './primitives/{{getPrimitiveType className}}.vue'
 {{else}}
 {{#checkVO className}}
 import {{className}} from './vo/{{className}}.vue'
 {{/checkVO}}
-{{#checkEntityMember className}}
-import {{className}} from './{{className}}.vue'
-{{/checkEntityMember}}
 {{#checkListOfEntityMember className}}
 {{/checkListOfEntityMember}}
 {{/if}}
 {{/queryParameters}}
-    export default {
-        name: '{{namePascalCase}}',
-        components:{
-            {{#queryParameters}}
-            {{#if (isPrimitive className)}}
-            {{getPrimitiveType className}},
-            {{else}}
-            {{#checkVO className}}
-            {{className}},
-            {{/checkVO}}
-            {{#checkEntityMember className}}
-            {{className}},
-            {{/checkEntityMember}}
-            {{#checkListOfEntityMember className}}
-            {{/checkListOfEntityMember}}
-            {{/if}}
-            {{/queryParameters}}
+
+export default {
+    name: '{{namePascalCase}}',
+    components:{
+        {{#queryParameters}}
+        {{#if (isPrimitiveComponent className)}}
+        {{getPrimitiveType className}},
+        {{else}}
+        {{#checkVO className}}
+        {{className}},
+        {{/checkVO}}
+        {{#checkListOfEntityMember className}}
+        {{/checkListOfEntityMember}}
+        {{/if}}
+        {{/queryParameters}}
+    },
+    props: {},
+    data: () => ({
+        editMode: true,
+        value: {
+            apiPath: '{{#attached 'Aggregate' this}}{{namePlural}}{{/attached}}/search/findBy{{namePascalCase}}',
+            parameters: {}
         },
-        props: {},
-        data: () => ({
-            editMode: true,
-            value: {
-                apiPath: '{{#attached 'Aggregate' this}}{{namePlural}}{{/attached}}/search/findBy{{namePascalCase}}',
-                parameters: {}
-            },
-        }),
-        created() {
+    }),
+    created() {
+    },
+    watch: {
+    },
+    methods: {
+        search() {
+            let search = null;
+            search = this.value;
+            this.$emit('search', search);
         },
-        watch: {
+        change() {
+            this.$emit("update:modelValue", this.value);
         },
-        methods: {
-            search() {
-                let search = null;
-                search = this.value;
-                this.$emit('search', search);
-            },
-            change() {
-                this.$emit("update:modelValue", this.value);
-            },
-        }
     }
+}
 </script>
+
 <style>
 .attributes-list{
     margin-left: 15px;
 }
 </style>
 
-
 <function>
-//if(this.queryParameters!=null) alert(this.queryParameters)
+    var importList = []
+    var componentList = []
+
+    //if(this.queryParameters!=null) alert(this.queryParameters)
     window.$HandleBars.registerHelper('ifNotNull', function (displayName, name) {
         if(displayName){
             return displayName;
@@ -124,7 +122,6 @@ import {{className}} from './{{className}}.vue'
     window.$HandleBars.registerHelper('print', function (value) {
         console.log(value)
     });
-
     window.$HandleBars.registerHelper('classType', function (type, options) {
         if(type.endsWith('Class')){
             return true;
@@ -132,7 +129,6 @@ import {{className}} from './{{className}}.vue'
             return false;
         }
     })
-
     window.$HandleBars.registerHelper('checkCommandPut', function (info, options) {
         if(info.endsWith('PUT')){
             return options.fn(this);
@@ -140,7 +136,6 @@ import {{className}} from './{{className}}.vue'
             options.inverse(this);
         }
     })
-
     window.$HandleBars.registerHelper('checkCommandDelete', function (info, options) {
         if(info.endsWith('DELETE')){
             return options.fn(this);
@@ -148,7 +143,6 @@ import {{className}} from './{{className}}.vue'
             options.inverse(this);
         }
     })
-
     window.$HandleBars.registerHelper('checkCommandPost', function (info, options) {
         if(info.endsWith('POST')) {
             return options.fn(this);
@@ -156,7 +150,6 @@ import {{className}} from './{{className}}.vue'
             options.inverse(this);
         }
     })
-
     window.$HandleBars.registerHelper('isNotId', function (className) {
         return (className != 'id')
     })
@@ -170,10 +163,38 @@ import {{className}} from './{{className}}.vue'
         }
     })
 
+    window.$HandleBars.registerHelper('isPrimitiveImport', function (className) {
+        if(!importList.includes(className)){
+            importList.push(className)
+            if(className.includes("String") || className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float")
+                || className.includes("Boolean") || className.includes("Date")){
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            return false;
+        }
+    })
+
+    window.$HandleBars.registerHelper('isPrimitiveComponent', function (className) {
+        if(!componentList.includes(className)){
+            componentList.push(className)
+            if(className.includes("String") || className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float")
+                || className.includes("Boolean") || className.includes("Date")){
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            return false;
+        }
+    })
+
     window.$HandleBars.registerHelper('getPrimitiveType', function (className) {
         if(className == "String") {
             return "String";
-        } else if(className == "Integer" || className == "Long" || className == "Double" || className == "Float" || className == "int") {
+        } else if(className == "Integer" || className == "Long" || className == "Double" || className == "Float" || className == "int" || className == "BigDecimal") {
             return "Number";
         } else if(className == "Boolean") {
             return "Boolean";
@@ -214,7 +235,7 @@ import {{className}} from './{{className}}.vue'
         }
         return "NO-CLASS";
     })
-
+    
     window.$HandleBars.registerHelper('setDefaultValue', function (className) {
         if(className.endsWith("String")) {
             return "''";

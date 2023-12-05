@@ -62,7 +62,7 @@ fileName: {{namePascalCase}}.vue
 import BaseEntity from './base-ui/BaseEntity.vue'
 {{#aggregateRoot.fieldDescriptors}}
 {{#if (isNotId nameCamelCase)}}
-{{#if (isPrimitive className)}}
+{{#if (isPrimitiveImport className)}}
 import {{getPrimitiveType className}} from './primitives/{{getPrimitiveType className}}.vue'
 {{else}}
 {{/if}}
@@ -96,7 +96,7 @@ export default {
     components:{
         {{#aggregateRoot.fieldDescriptors}}
         {{#if (isNotId nameCamelCase)}}
-        {{#if (isPrimitive className)}}
+        {{#if (isPrimitiveComponent className)}}
         {{getPrimitiveType className}},
         {{else}}
         {{/if}}
@@ -142,6 +142,9 @@ export default {
 </script>
 
 <function>
+    var importList = []
+    var componentList = []
+
     window.$HandleBars.registerHelper('getEntityFromList', function (className) {
         if(className.includes("List<") && className.includes(">")) {
             return className.replace("List<", "").replace(">", "");
@@ -191,9 +194,35 @@ export default {
 
     window.$HandleBars.registerHelper('isPrimitive', function (className) {
         if(className.includes("String") || className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float")
-                || className.includes("Boolean") || className.includes("Date")){
+            || className.includes("Boolean") || className.includes("Date")){
             return true;
         } else {
+            return false;
+        }
+    })
+    window.$HandleBars.registerHelper('isPrimitiveImport', function (className) {
+        if(!importList.includes(className)){
+            importList.push(className)
+            if(className.includes("String") || className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float")
+                || className.includes("Boolean") || className.includes("Date")){
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            return false;
+        }
+    })
+    window.$HandleBars.registerHelper('isPrimitiveComponent', function (className) {
+        if(!componentList.includes(className)){
+            componentList.push(className)
+            if(className.includes("String") || className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float")
+                || className.includes("Boolean") || className.includes("Date")){
+                return true;
+            } else {
+                return false;
+            }
+        }else{
             return false;
         }
     })
@@ -205,7 +234,7 @@ export default {
             } else {
                 return "String";
             }
-        } else if(className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float") || className.includes("int")) {
+        } else if(className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float") || className.includes("int") || className.includes("BigDecimal")) {
             if(this.isLob) {
                 return "LargeObject";
             } else {

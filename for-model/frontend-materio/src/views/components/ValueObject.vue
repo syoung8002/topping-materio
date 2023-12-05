@@ -266,7 +266,7 @@ export default {
             } else {
                 return "String";
             }
-        } else if(className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float") || className.includes("int")) {
+        } else if(className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float") || className.includes("int") || className.includes("BigDecimal") {
             if(this.isLob) {
                 return "LargeObject";
             } else {

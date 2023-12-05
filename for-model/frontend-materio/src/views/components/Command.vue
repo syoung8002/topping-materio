@@ -50,7 +50,7 @@ fileName: {{pascalCase name}}.vue
 
 <script>
 {{#fieldDescriptors}}
-{{#if (isPrimitive className)}}
+{{#if (isPrimitiveImport className)}}
 import {{getPrimitiveType className}} from './primitives/{{getPrimitiveType className}}.vue'
 {{else}}
 {{#checkVO className}}
@@ -63,11 +63,12 @@ import {{className}} from './{{className}}.vue'
 {{/checkListOfEntityMember}}
 {{/if}}
 {{/fieldDescriptors}}
+
 export default {
     name: '{{namePascalCase}}Command',
     components:{
         {{#fieldDescriptors}}
-        {{#if (isPrimitive className)}}
+        {{#if (isPrimitiveComponent className)}}
         {{getPrimitiveType className}},
         {{else}}
         {{#checkVO className}}
@@ -158,10 +159,38 @@ export default {
         }
     })
 
+    window.$HandleBars.registerHelper('isPrimitiveImport', function (className) {
+        if(!importList.includes(className)){
+            importList.push(className)
+            if(className.includes("String") || className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float")
+                || className.includes("Boolean") || className.includes("Date")){
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            return false;
+        }
+    })
+
+    window.$HandleBars.registerHelper('isPrimitiveComponent', function (className) {
+        if(!componentList.includes(className)){
+            componentList.push(className)
+            if(className.includes("String") || className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float")
+                || className.includes("Boolean") || className.includes("Date")){
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            return false;
+        }
+    })
+
     window.$HandleBars.registerHelper('getPrimitiveType', function (className) {
         if(className == "String") {
             return "String";
-        } else if(className == "Integer" || className == "Long" || className == "Double" || className == "Float" || className == "int") {
+        } else if(className == "Integer" || className == "Long" || className == "Double" || className == "Float" || className == "int" || className == "BigDecimal") {
             return "Number";
         } else if(className == "Boolean") {
             return "Boolean";

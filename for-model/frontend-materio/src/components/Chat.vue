@@ -8,7 +8,7 @@
                 large
         >
             <v-icon v-if="openChatBox">mdi-close</v-icon>
-            <img v-else src="image/chatgpt.png" class="chatgpt-icon" />
+            <img v-else src="chatgpt.svg" class="chatgpt-icon" />
         </v-btn>
 
         <v-card v-if="openChatBox" class="chat-open-box">
