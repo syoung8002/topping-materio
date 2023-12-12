@@ -34,19 +34,20 @@ export default {
     data: () => ({
         selections : [{{#items}}"{{value}}",{{/items}}],
     }),
-    created() {
+    async created() {
         this.value = this.modelValue
         if(!this.value) {
             this.value = [];
         }
     },
     watch: {
-        value() {
-            this.$emit("update:modelValue", this.value);
-        },
+        value:{
+            handler: function(){
+                this.$emit("update:modelValue", this.value)
+            }
+        }
     },
     methods: {
     }
 }
 </script>
-

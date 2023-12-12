@@ -41,17 +41,20 @@ fileName: LargeObject.vue
         name: 'LargeObject',
         components:{
         },
-        data: () => ({
-            isFile: true,
-            type: '',
-            file: null,
-        }),
         props: {
             modelValue: [String, Number, Object],
             editMode: Boolean,
             label: String
         },
+        data: () => ({
+            isFile: true,
+            type: '',
+            file: null,
+            value: null,
+
+        }),
         created() {
+            this.value = this.modelValue
             if(typeof this.value === 'string') {
                 this.type = 'text';
             } else if(typeof this.value === 'number') {

@@ -1,10 +1,10 @@
 forEach: Model
 fileName: String.vue
 ----
-<template>
+-<template>
     <div>
         <div v-if="editMode">
-            <div class="label-title" style="margin-left: 5px;">\{{label}}</div>
+            <div class="label-title" style="margin-left: 5px;">{{label}}</div>
             <v-text-field 
                 v-bind="$attrs"
                 v-model="value"
@@ -15,7 +15,7 @@ fileName: String.vue
             />
         </div>
         <div v-else>
-            \{{label}} : \{{value}}
+            {{label}} : {{value}}
         </div>
     </div>
 </template>
@@ -31,6 +31,12 @@ fileName: String.vue
             },
             editMode: Boolean,
             label: String,
+        },
+        data: () => ({
+            value: null,
+        }),
+        created(){
+            this.value = this.modelValue
         },
         methods:{
             change(){

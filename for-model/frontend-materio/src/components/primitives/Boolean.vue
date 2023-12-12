@@ -33,6 +33,12 @@ fileName: Boolean.vue
             editMode: Boolean,
             label: String,
         },
+        data: () => ({
+            value: null,
+        }),
+        created(){
+            this.value = this.modelValue
+        },
         methods:{
             change(){
                 this.$emit("update:modelValue", this.value);

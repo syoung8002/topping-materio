@@ -22,8 +22,8 @@ except: {{#ifEquals dataProjection "query-for-aggregate"}}false{{else}}true{{/if
                 </v-col>
                 {{/checkVO}}
                 {{#checkEntityMember className}}
-                <v-col style="max-width:140px;">
-                    <{{className}} offline label="{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}" v-model="value.parameters.{{nameCamelCase}}" :editMode="editMode" @change="change"/>
+                <v-col style="max-width:150px;">
+                    <{{className}} style="margin-top: 0px; margin-left: 10px;" offline label="{{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}" v-model="value.parameters.{{nameCamelCase}}" :editMode="editMode" @change="change"/>
                 </v-col>
                 {{/checkEntityMember}}
                 {{#checkListOfEntityMember className}}
@@ -56,62 +56,67 @@ import {{getPrimitiveType className}} from './primitives/{{getPrimitiveType clas
 {{#checkVO className}}
 import {{className}} from './vo/{{className}}.vue'
 {{/checkVO}}
+{{#checkEntityMember className}}
+import {{className}} from './{{className}}.vue'
+{{/checkEntityMember}}
 {{#checkListOfEntityMember className}}
 {{/checkListOfEntityMember}}
 {{/if}}
 {{/queryParameters}}
-
-export default {
-    name: '{{namePascalCase}}',
-    components:{
-        {{#queryParameters}}
-        {{#if (isPrimitiveComponent className)}}
-        {{getPrimitiveType className}},
-        {{else}}
-        {{#checkVO className}}
-        {{className}},
-        {{/checkVO}}
-        {{#checkListOfEntityMember className}}
-        {{/checkListOfEntityMember}}
-        {{/if}}
-        {{/queryParameters}}
-    },
-    props: {},
-    data: () => ({
-        editMode: true,
-        value: {
-            apiPath: '{{#attached 'Aggregate' this}}{{namePlural}}{{/attached}}/search/findBy{{namePascalCase}}',
-            parameters: {}
+    export default {
+        name: '{{namePascalCase}}',
+        components:{
+            {{#queryParameters}}
+            {{#if (isPrimitiveComponent className)}}
+            {{getPrimitiveType className}},
+            {{else}}
+            {{#checkVO className}}
+            {{className}},
+            {{/checkVO}}
+            {{#checkEntityMember className}}
+            {{className}},
+            {{/checkEntityMember}}
+            {{#checkListOfEntityMember className}}
+            {{/checkListOfEntityMember}}
+            {{/if}}
+            {{/queryParameters}}
         },
-    }),
-    created() {
-    },
-    watch: {
-    },
-    methods: {
-        search() {
-            let search = null;
-            search = this.value;
-            this.$emit('search', search);
+        props: {},
+        data: () => ({
+            editMode: true,
+            value: {
+                apiPath: '{{#attached 'Aggregate' this}}{{namePlural}}{{/attached}}/search/findBy{{namePascalCase}}',
+                parameters: {}
+            },
+        }),
+        created() {
         },
-        change() {
-            this.$emit("update:modelValue", this.value);
+        watch: {
         },
+        methods: {
+            search() {
+                let search = null;
+                search = this.value;
+                this.$emit('search', search);
+            },
+            change() {
+                this.$emit("update:modelValue", this.value);
+            },
+        }
     }
-}
 </script>
-
 <style>
 .attributes-list{
     margin-left: 15px;
 }
 </style>
 
+
 <function>
     var importList = []
     var componentList = []
 
-    //if(this.queryParameters!=null) alert(this.queryParameters)
+//if(this.queryParameters!=null) alert(this.queryParameters)
     window.$HandleBars.registerHelper('ifNotNull', function (displayName, name) {
         if(displayName){
             return displayName;
@@ -194,7 +199,7 @@ export default {
     window.$HandleBars.registerHelper('getPrimitiveType', function (className) {
         if(className == "String") {
             return "String";
-        } else if(className == "Integer" || className == "Long" || className == "Double" || className == "Float" || className == "int" || className == "BigDecimal") {
+        } else if(className == "Integer" || className == "Long" || className == "Double" || className == "Float" || className == "int") {
             return "Number";
         } else if(className == "Boolean") {
             return "Boolean";
@@ -212,7 +217,7 @@ export default {
 
     window.$HandleBars.registerHelper('checkEntityMember', function (className, options) {
         if(!(className.endsWith("Address") || className.endsWith("Photo") || className.endsWith("User") || className.endsWith("Email") 
-                || className.endsWith("Payment") || className.endsWith("Money") || className.endsWith("Weather") || className.endsWith("Rating")) && className.indexOf("java.") == -1 && className.indexOf("List") == -1){
+                || className.endsWith("Payment") || className.endsWith("Money") || className.endsWith("Weather") || className.endsWith("String")|| className.endsWith("Rating")) && className.indexOf("java.") == -1 && className.indexOf("List") == -1){
             return options.fn(this);
         } else {
             return options.inverse(this);
