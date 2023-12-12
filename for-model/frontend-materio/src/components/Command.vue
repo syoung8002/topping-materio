@@ -110,6 +110,9 @@ export default {
 
 
 <function>
+    var importList = []
+    var componentList = []
+
     window.$HandleBars.registerHelper('print', function (value) {
         console.log(value)
     });
