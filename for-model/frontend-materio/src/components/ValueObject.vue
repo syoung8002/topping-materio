@@ -251,8 +251,11 @@ export default {
     })
 
     window.$HandleBars.registerHelper('isPrimitive', function (className) {
-        if(className.includes("String") || className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float")
-                || className.includes("Boolean") || className.includes("Date")){
+        if(className.includes("String") || className.includes("Integer") ||
+                className.includes("Long") || className.includes("Double") || 
+                className.includes("Float") || className.includes("Boolean") || 
+                className.includes("Date") || className.includes("BigDecimal")
+        ) {
             return true;
         } else {
             return false;
@@ -266,7 +269,10 @@ export default {
             } else {
                 return "String";
             }
-        } else if(className.includes("Integer") || className.includes("Long") || className.includes("Double") || className.includes("Float") || className.includes("int") || className.includes("BigDecimal") {
+        } else if(className.includes("Integer") || className.includes("Long") || 
+                className.includes("Double") || className.includes("Float") || 
+                className.includes("int") || className.includes("BigDecimal")
+        ) {
             if(this.isLob) {
                 return "LargeObject";
             } else {
@@ -309,7 +315,10 @@ export default {
         var date = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
         if(className.endsWith("String")) {
             return "''";
-        } else if(className.endsWith("Integer") || className.endsWith("Long") || className.endsWith("Double") || className.endsWith("Float")) {
+        } else if(className.endsWith("Integer") || className.endsWith("Long") || 
+                className.endsWith("Double") || className.endsWith("Float") || 
+                className.includes("int") || className.includes("BigDecimal")
+        ) {
             return 0;
         } else if(className.endsWith("Boolean")) {
             return false;
