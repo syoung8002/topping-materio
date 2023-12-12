@@ -3,7 +3,7 @@ fileName: openapi.js
 ---
 {{#boundedContexts}}
     {{#aggregates}}
-import {{nameCamelCase}}Yaml from "../api/{{nameCamelCase}}-openapi.yaml";
+import {{nameCamelCase}}Yaml from "./{{nameCamelCase}}-openapi.yaml";
     {{/aggregates}}
 {{/boundedContexts}}
 import YAML from "json2yaml";

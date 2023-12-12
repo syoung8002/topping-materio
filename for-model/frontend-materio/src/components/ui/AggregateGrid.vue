@@ -37,6 +37,9 @@ fileName: {{namePascalCase}}Grid.vue
                 {{/isRestRepository}}
                 {{/commands}}
             </div>
+            {{#attached 'View' this}}
+            <{{namePascalCase}} @search="search" style="margin-bottom: 10px; background-color: #ffffff;"></{{namePascalCase}}>
+            {{/attached}}
             <div class="mb-5 text-lg font-bold"></div>
             <div class="table-responsive">
                 <v-table>
@@ -171,7 +174,7 @@ import {{className}} from '../vo/{{className}}.vue'
 {{/aggregateRoot.fieldDescriptors}}
 {{#outgoingRelations}}
 {{#target}}
-import {{nameCamelCase}}Id from '../{{nameCamelCase}}Id.vue'
+import {{namePascalCase}}Id from '../{{namePascalCase}}Id.vue'
 {{/target}}
 {{/outgoingRelations}}
 {{#aggregateRoot.fieldDescriptors}}

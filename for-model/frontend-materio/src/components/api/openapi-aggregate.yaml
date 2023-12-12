@@ -152,13 +152,9 @@ components:
           description: {{name}} of this {{../namePascalCase}}
           type: {{map @root.contexts.mappings className}}
       {{/aggregateRoot.fieldDescriptors}}
-      example:
-      {{#aggregateRoot.fieldDescriptors}}
-        {{name}}: {{map @root.contexts.examples className}}
-      {{/aggregateRoot.fieldDescriptors}}
 tags:
-- name: {{namePascalCase}}
-  description: {{namePascalCase}} resource
+  - name: {{namePascalCase}}
+    description: {{namePascalCase}} resource
 
 <function>
 

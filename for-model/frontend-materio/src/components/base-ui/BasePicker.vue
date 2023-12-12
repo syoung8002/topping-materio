@@ -18,7 +18,7 @@ fileName: BasePicker.vue
 </template>
 
 <script>
-import BaseRepository from '../../../repository/BaseRepository';
+import BaseRepository from '../repository/BaseRepository';
 import axios from '@axios'
 
 import _ from'lodash';

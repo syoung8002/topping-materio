@@ -2,7 +2,7 @@ fileName: Payment.vue
 ---
 <template>
     <div style="margin: 0 -15px 0 -15px;">
-        <v-card-title v-if="inList" style="font-size: 15px;">
+        <v-card-title v-if="inList && payment.paymentType" style="font-size: 15px;">
             PaymentType: \{{payment.paymentType }}/Amount: \{{payment.amount }}
         </v-card-title>
         <v-card-text v-if="!inList">

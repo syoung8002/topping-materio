@@ -2,7 +2,7 @@ fileName: User.vue
 ---
 <template>
     <div style="margin: 13px 0 -15px 0">
-        <v-card-title  v-if="inList" style="font-size: 15px;">
+        <v-card-title  v-if="inList && user.name && user.userId" style="font-size: 15px;">
             UserName: \{{user.name}}, Id: \{{ user.userId }}
         </v-card-title>
         <v-card-title  v-if="!inList">

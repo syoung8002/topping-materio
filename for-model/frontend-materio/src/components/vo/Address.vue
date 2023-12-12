@@ -2,7 +2,7 @@ fileName: Address.vue
 ---
 <template>
     <div style="margin: 0 -15px 0 -15px;">
-        <v-card-title  v-if="inList" style="font-size: 15px;">
+        <v-card-title v-if="inList && address.country && address.state" style="font-size: 15px;">
             \{{address.country }} / \{{address.state }} \{{address.city }} \{{address.street }} (\{{address.zipcode }})
         </v-card-title>
         <v-card-text v-if="!inList">

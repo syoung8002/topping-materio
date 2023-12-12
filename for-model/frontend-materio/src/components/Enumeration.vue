@@ -28,22 +28,22 @@ export default {
     mixins:[BaseEntity],
     components:{},
     props: {
+        modelValue: Object,
         label: String
     },
     data: () => ({
         selections : [{{#items}}"{{value}}",{{/items}}],
     }),
-    async created() {
+    created() {
         this.value = this.modelValue
         if(!this.value) {
             this.value = [];
         }
     },
     watch: {
-        value(newVal) {
-            this.$emit("update:modelValue", newVal);
+        value() {
+            this.$emit("update:modelValue", this.value);
         },
-        
     },
     methods: {
     }

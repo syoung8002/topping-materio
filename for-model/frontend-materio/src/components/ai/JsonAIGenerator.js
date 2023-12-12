@@ -15,16 +15,18 @@ export default class JsonAIGenerator extends AIGenerator{
         return messages;
     }
     createModel(text){
-        //console.log(text);
-        let model
+        let model;
+        
         try{
-            // text = text.replace(/"[\w\s]+":\s*null,?/g, '');
-            // text = text.replace(/"[\w\s]+":\s*null?/g, '');
             model = partialParse(text);
 
             return model;
         }catch(e){
             console.log("error to parse:" + text);
+
+            if(this.client.onError){
+                this.client.onError(e);
+            }
 
             throw e;
         }

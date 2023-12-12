@@ -4,7 +4,7 @@ fileName: String.vue
 <template>
     <div>
         <div v-if="editMode">
-            <div class="label-title">\{{label}}</div>
+            <div class="label-title" style="margin-left: 5px;">\{{label}}</div>
             <v-text-field 
                 v-bind="$attrs"
                 v-model="value"

@@ -11,14 +11,10 @@ import BaseSecurity from './BaseSecurity.vue';
 export default {
     name: 'BaseGrid',
     data: () => ({
-        flex: null,
         tick : true,
-        openDialog : false,
-        selectedRow: null,
         path: 'path',
         repository: null,
         menu: [],
-        
     }),
     mixins:[
         BaseEntity,
@@ -60,8 +56,6 @@ export default {
                 this.$emit('input', this.value);
             }
         },
-
-
         async search(query) {
             var me = this;
             if(me.offline){
@@ -76,15 +70,6 @@ export default {
             }
 
             return this.value;
-        },
-        edit(){
-            for(var i = 0; i < this.value.length; i++){
-                if(this.value[i].index == this.itemToEdit.index){
-                    this.value[i] = this.itemToEdit
-                    break;
-                }
-            }
-            this.openDialog = false;
         },
         async generateMenu(){
             let menuVal = await this.repository.generate("menus")
@@ -133,8 +118,13 @@ export default {
         changeSelectedRow(val){
             this.selectedRow = val
         },
-        
-       
+        openEditDialog(){
+            this.editDialog = true;
+        },
+        closeDialog(){
+            this.openDialog = false
+            this.editDialog = false
+        }
     },
 }
 </script>

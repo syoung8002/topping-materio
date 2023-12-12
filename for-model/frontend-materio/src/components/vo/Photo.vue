@@ -2,7 +2,7 @@ fileName: Photo.vue
 ---
 <template>
     <div style="margin: 0 -15px 0 -15px;">
-        <v-card-title v-if="inList" style="font-size: 15px;">
+        <v-card-title v-if="inList && photo.imgName" style="font-size: 15px;">
             imageName: \{{ photo.imgName }}
         </v-card-title>
 

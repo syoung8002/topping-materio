@@ -104,10 +104,10 @@
 </template>
 
 <script>
-import ChatGenerator from "../ai/ChatGenerator.js";
-import apiSpec from "../api/openapi.js";
+import ChatGenerator from "./ai/ChatGenerator.js";
+import apiSpec from "./api/openapi.js";
 
-import BaseRepository from "../repository/BaseRepository";
+import BaseRepository from "./repository/BaseRepository";
 import axios from "@axios";
 
 export default {
@@ -249,6 +249,24 @@ RESPONSE FORMAT:
             });
         },
 
+        onError(error) {
+            this.loading = false;
+
+            if (error.code === "invalid_api_key") {
+                var apiKey = prompt("API Key 를 입력하세요.");
+                localStorage.setItem("openAIToken", apiKey);
+                this.generator.generate();
+                
+            } else {
+                var message = {
+                    role:'system',
+                    text: error.message
+                };
+
+                this.messages.push(message);
+            }
+        },
+
         async doit(message){
             this.loading = true;
 
@@ -266,12 +284,12 @@ RESPONSE FORMAT:
                     }
                 }).catch(error => {
                     if (error.response) {
-                        this.handleException(error);
+                        this.onError(error);
                     } else {
                         this.loading = false;
                         var message = {
                             role: 'system',
-                            text: error
+                            text: error.response.data ? error.response.data.message : error
                         }
                         this.messages.push(message);
                     }
@@ -318,19 +336,6 @@ ${value}
             this.newMessage = "";
         },
 
-        async handleException(error) {
-            if (error.response.data && error.response.data.message) {
-                await this.init();
-                this.newMessage = `
-Respond by resolving the error message below:
-${error.response.data.message}
-`;
-                await this.generator.generate();
-
-                this.newMessage = "";
-            }
-        },
-
     }
 }
 </script>
@@ -359,7 +364,7 @@ ${error.response.data.message}
     padding: 5px;
 }
 .user-message {
-    background: #2196F3;
+    background: #9155FD;
     color: #ffffff;
     font-size: 16px;
     font-weight: bold;

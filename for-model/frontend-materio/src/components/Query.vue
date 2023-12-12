@@ -8,7 +8,7 @@ except: {{#ifEquals dataProjection "query-for-aggregate"}}false{{else}}true{{/if
             {{#ifNotNull displayName namePascalCase}}{{/ifNotNull}}
         </v-card-title>
     
-        <v-card-text style="margin-top:-30px;">
+        <v-card-text style="margin-top:-10px;">
             <v-row no-gutters style="margin: 15px 0px -10px -15px;">
                 {{#queryParameters}}
                 {{#if (isPrimitive className)}}

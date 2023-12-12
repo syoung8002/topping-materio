@@ -2,7 +2,7 @@ fileName: Email.vue
 ---
 <template>
     <div style="margin: 0 -15px 0 -15px;">
-        <v-card-title v-if="inList" style="font-size: 15px;">
+        <v-card-title v-if="inList && email.address && email.subject" style="font-size: 15px;">
             Address: \{{email.address }} / Subject: \{{email.subject }} / Content: \{{email.content }}
         </v-card-title>
         <v-card-text v-if="!inList">

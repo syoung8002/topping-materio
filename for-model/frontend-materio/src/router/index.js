@@ -9,20 +9,20 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: () => import('../pages/Index.vue'),
+      component: () => import('../components/pages/Index.vue'),
     },
 {{#boundedContexts}}
   {{#aggregates}}
     {
       path: '/{{namePlural}}',
-      component: () => import('../views/components/ui/{{namePascalCase}}Grid.vue'),
+      component: () => import('../components/ui/{{namePascalCase}}Grid.vue'),
     },
   {{/aggregates}}
   {{#views}}
     {{#ifEquals dataProjection "cqrs"}}
     {
       path: '/{{namePlural}}',
-      component: () => import('../views/components/{{namePascalCase}}View.vue'),
+      component: () => import('../components/{{namePascalCase}}View.vue'),
     },
     {{/ifEquals}}
   {{/views}}
